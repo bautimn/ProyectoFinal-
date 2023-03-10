@@ -1,0 +1,23 @@
+{% extends 'BlogBauti/padre.html' %}
+
+{% block titulo %}
+Bienvenido a BlogBauti
+{% endblock %}
+
+{% block contenido %}
+<section class="features-icons hg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Eliminar Pelicula</h1>
+                <form method="POST">
+                {% csrf_token %}
+                    <p>Seguro que desea eliminar la pelicula {{ object }}?</p>
+                    
+                    <input type="submit" value="Seguro">
+                </form> 
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

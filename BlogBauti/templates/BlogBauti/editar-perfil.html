@@ -1,0 +1,30 @@
+{% extends 'BlogBauti/padre.html' %}
+
+{% block titulo %}
+
+Editar Perfil
+
+{% endblock titulo %}
+
+{% block contenido %}
+
+<section class="features-icons hg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <h1>Formulario - Editar Perfil</h1>
+                <h3>Usuario> {{ usuario }}</h3>
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <table>
+                        {{ mi_formulario.as_table }}
+                    </table>
+                    <input type="submit" value="Editar Perfil">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

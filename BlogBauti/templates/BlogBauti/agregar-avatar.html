@@ -1,0 +1,27 @@
+{% extends 'BlogBauti/padre.html' %}
+
+{% block titulo %}
+
+Agregar un avatar
+
+{% endblock titulo %}
+
+{% block contenido %}
+
+<section class="features-icons hg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <h1>Formulario - Editar Avatar</h1>
+
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ mi_formulario_as.p }}
+                    <input type="submit" value="Editar Avatar">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
