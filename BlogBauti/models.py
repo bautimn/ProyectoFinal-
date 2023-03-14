@@ -18,10 +18,11 @@ class Usuario(models.Model):
         return self.nombre + ' - ' + self.mail
     
 class Avatar(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to='avatares', null = True, blank = True, default='blank.png')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank=True, default='DEFAULT.png')
 
     def __str__(self):
         return self.user.username
+    
     class Meta:
         verbose_name_plural = 'Avatares'

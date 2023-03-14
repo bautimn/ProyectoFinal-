@@ -1,7 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Avatar
 
 class FormularioPeliculas(forms.Form):
 
@@ -23,17 +22,11 @@ class MyUserCreationForm(UserCreationForm):
         help_texts = {k: '' for k in fields}
 
 class UserEditForm(forms.Form):
-    username = forms.CharField(label='Modificar Nombre de Usuario')
+
+    username = forms.CharField(label='Modificar Usuario')
     email = forms.EmailField(label='Modificar Email')
 
     class Meta:
-
         model = User
         fields = ['username', 'email']
         help_texts = {k: '' for k in fields}
-
-class AvatarFormulario(forms.ModelForm):
-    class Meta:
-        model = Avatar
-        fields = '__all__'
-        exclude = ['user']

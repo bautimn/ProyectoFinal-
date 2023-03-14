@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
-from BlogBauti.forms import FormularioPeliculas, MyUserCreationForm, UserEditForm, AvatarFormulario
+from BlogBauti.forms import FormularioPeliculas, MyUserCreationForm, UserEditForm
 from .models import Pelicula
 
 def inicio(request):
@@ -154,39 +154,45 @@ def editar_perfil(request):
     usuario = User.objects.get(username=request.user)
 
     if request.method == 'POST':
-        mi_formulario = UserEditForm(request.POST, instance=request.user)
+        mi_formulario = UserEditForm(request.POST)
 
         if mi_formulario.is_valid():
             informacion = mi_formulario.cleaned_data
 
             usuario.username = informacion['username']
             usuario.email = informacion['email']
-            usuario.password1 = informacion['password1']
-            usuario.password2 = informacion['password2']
-            usuario.last_name = informacion['last_name']
-            usuario.first_name = informacion['first_name']
 
             usuario.save()
-
-            return redirect('blogbauti/')
     
     else:
+
         mi_formulario = UserEditForm(initial={'username': usuario.username,
-                                              'email': usuario.email})
-        
-    return render(request, 'BlogBauti/editar-perfil.html', {'mi_formulario': mi_formulario,
-                                                            'usuario': usuario})
+                                            'email': usuario.email})
+    
+    return render(request, 'blogbauti/editar-perfil.html', {'mi_formulario': mi_formulario})
+    
 
-@login_required
-def crear_avatar(request):
-    avatar = request.user.avatar
-    mi_formulario = AvatarFormulario(instance=avatar)
 
-    if request.method == 'POST':
-        mi_formulario = AvatarFormulario(request.POST, request.FILES, instance=avatar)
-        if mi_formulario.is_valid():
-            mi_formulario.save()
-            return render(request, 'BlogBauti/inicio.html')
-            
-    else:
-        return render(request, 'BlogBauti/agregar-avatar.html', {'mi_formulario': mi_formulario})
+
+
+class PeliculaList(ListView):
+    model = Pelicula
+    template_name = 'blogbauti/pelicula_list.html'
+
+class PeliculaDetalle(DetailView):
+    model = Pelicula
+    template_name = 'blogbauti/pelicula_detalle.html'
+
+class PeliculaCreacion(CreateView):
+    model = Pelicula
+    success_url = '/blogbauti/pelicula/list'
+    fields = ['nombre_pelicula', 'fecha_estreno', 'genero', 'descripcion_corta']
+
+class PeliculaUpdate(UpdateView):
+    model = Pelicula
+    success_url = '/blogbauti/pelicula/list'
+    fields = ['nombre_pelicula', 'fecha_estreno', 'genero', 'descripcion_corta']
+
+class PeliculaDelete(DeleteView):
+    model = Pelicula
+    success_url = '/blogbauti/pelicula/list'
