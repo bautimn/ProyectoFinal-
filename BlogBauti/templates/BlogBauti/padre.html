@@ -30,6 +30,7 @@
                     Hola {{ user.username }}!
                     <img src="{{ user.avatar.imagen.url }}" class="rounded-circle" height="40px" alt="">
                     <a href="{% url 'logout' %}">Salir</a>
+                    <a href="{% url 'editar-perfil' %}">Perfil</a>
                 </p>
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'login' %}">Iniciar Sesión</a>
