@@ -12,16 +12,16 @@ Registro de Usuario
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                
-                {% if mensaje %}
-                <p style="color: red">{{ mensaje }}</p>
-                {% endif %}
 
                 <form action="" method="POST">
+
                     {% csrf_token %}
+
                     {{form.as_p}}
-                    <button type="submit">Crear Usuario</button>
+
+                    <button type="submit">Registrarse</button>
                 </form>
+                
             </div>
         </div>
     </div>

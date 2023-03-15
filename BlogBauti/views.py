@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 
-from BlogBauti.forms import FormularioPeliculas, MyUserCreationForm, UserEditForm
+from BlogBauti.forms import FormularioPeliculas, MyUserCreationForm, UserEditForm, AvatarFormulario
 from .models import Pelicula
 
 def inicio(request):
@@ -134,14 +134,16 @@ def login_request(request):
     return render(request, 'BlogBauti/login.html', contexto)
 
 def register(request):
+
     if request.method == 'POST':
         #form=UserCreationForm(request.POST)
-        form=MyUserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
 
         if form.is_valid():
             username = form.cleaned_data['username']
             contexto = {'mensaje': 'Usuario creado satisfactoriamente.'}
-            return render(request, 'BlogBauti/login.html', contexto)
+            return render(request, 'BlogBauti/inicio.html', contexto)
+        
     else:
         #form = UserCreationForm()
         form = MyUserCreationForm()
@@ -171,7 +173,18 @@ def editar_perfil(request):
     
     return render(request, 'blogbauti/editar-perfil.html', {'mi_formulario': mi_formulario})
     
-
+@login_required
+def agregar_avatar(request):
+    avatar = request.user.avatar
+    mi_formulario = AvatarFormulario(instance=avatar)
+     
+    if request.method == 'POST':
+        mi_formulario = AvatarFormulario(request.POST, request.FILES, instance=avatar)
+        if mi_formulario.is_valid():
+            mi_formulario.save()
+        else:
+            contexto = {'mi_formulario': mi_formulario}
+            return render(request, 'blogbauti/agregar-avatar.html', contexto)
 
 
 
@@ -196,3 +209,4 @@ class PeliculaUpdate(UpdateView):
 class PeliculaDelete(DeleteView):
     model = Pelicula
     success_url = '/blogbauti/pelicula/list'
+

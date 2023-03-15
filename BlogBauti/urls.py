@@ -18,5 +18,5 @@ urlpatterns = [
     path('registro', views.register, name = 'registro'),
     path('logout', LogoutView.as_view(template_name='BlogBauti/logout.html'), name = 'logout'),
     path('editar-perfil/', views.editar_perfil, name='editar-perfil'),
-   
+    path('agregar-avatar/', views.agregar_avatar, name='agregar-avatar'),
     ]

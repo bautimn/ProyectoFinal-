@@ -2,7 +2,7 @@
 
 {% block titulo %}
 
-Agregar un avatar
+Agregar Avatar a tu Perfil
 
 {% endblock titulo %}
 
@@ -18,7 +18,7 @@ Agregar un avatar
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ mi_formulario_as.p }}
-                    <input type="submit" value="Editar Avatar">
+                    <input type="submit" value="Editar">
                 </form>
             </div>
         </div>

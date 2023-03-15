@@ -18,7 +18,7 @@ class Usuario(models.Model):
         return self.nombre + ' - ' + self.mail
     
 class Avatar(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to='avatares', null=True, blank=True, default='DEFAULT.png')
 
     def __str__(self):
