@@ -9,10 +9,21 @@
                 <h1>Resultados de Busqueda</h1>
                 <body>
                     <p>Estamos buscando la pelicula: {{ peliculas }}</p>
+
+                    {% if peliculas %}
+
+                    <ul>
+                        {% for pelicula in peliculas %}
+                        <li> {{ pelicula.pelicula_busqueda }}: {{ pelicula }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    {% endif %}
                 </body>
                 
             </div>
         </div>
     </div>
 </section>
+
 {% endblock %}

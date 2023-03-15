@@ -7,6 +7,8 @@
         <div class="row">
             <div class="col-lg-12">
                 
+                <h1>Iniciar Sesión</h1>
+
                 {% if mensaje %}
                 <p style="color: red">{{ mensaje }}</p>
                 {% endif %}
@@ -14,13 +16,11 @@
                 <form action="" method="POST">
 
                     {% csrf_token %}
-
                     {{form.as_p}}
 
                     <button type="submit">Iniciar Sesión</button>
 
                 </form>
-                
             </div>
         </div>
     </div>

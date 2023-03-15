@@ -16,8 +16,10 @@ Agregar Avatar a tu Perfil
                 <h1>Formulario - Editar Avatar</h1>
 
                 <form action="" method="POST" enctype="multipart/form-data">
+                    
                     {% csrf_token %}
                     {{ mi_formulario_as.p }}
+                    
                     <input type="submit" value="Editar">
                 </form>
             </div>

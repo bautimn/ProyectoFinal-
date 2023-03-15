@@ -9,10 +9,10 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 
-from BlogBauti.forms import FormularioPeliculas, MyUserCreationForm, UserEditForm, AvatarFormulario
+from .forms import FormularioPeliculas, MyUserCreationForm, UserEditForm, AvatarFormulario
 from .models import Pelicula
 
 def inicio(request):
@@ -53,9 +53,11 @@ def buscar(request):
         pelicula_busqueda = request.GET['nombre_pelicula']
         resultado = Pelicula.objects.filter(nombre_pelicula__icontains = pelicula_busqueda)
 
-        return render(request, 'BlogBauti/resultados-busqueda.html', {'peliculas': pelicula_busqueda})
+        return render(request, 'BlogBauti/resultados-busqueda.html', {'pelicula': pelicula_busqueda, 'nombre_pelicula': pelicula_busqueda})
 
-    respuesta = 'No se encuentra esa película.'
+    else:
+        respuesta = 'No se encuentra esa película.'
+
     return HttpResponse(respuesta)
 
 def leer_peliculas(request):
